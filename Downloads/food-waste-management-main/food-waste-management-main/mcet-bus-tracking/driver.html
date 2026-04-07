@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Broadcast - MCET Bus Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="driver-body">
+    <div class="driver-container glass-panel">
+        <div class="header-section">
+            <h1>Driver Broadcast</h1>
+            <p>Share your live location with students securely</p>
+        </div>
+
+        <div id="setupSection" class="form-section">
+            <div class="input-group">
+                <label for="busId">Bus Details / Route</label>
+                <input type="text" id="busId" placeholder="e.g. KL-03-AA-1234 (Kollam Route)">
+            </div>
+            <div class="input-group">
+                <label for="driverName">Driver Name</label>
+                <input type="text" id="driverName" placeholder="Enter your full name">
+            </div>
+            <button id="startTrackingBtn" class="btn btn-primary btn-large">Start Sharing Location</button>
+            <p class="mt-2 text-center"><a href="index.html" class="text-link">Back to Tracking Map</a></p>
+        </div>
+
+        <div id="activeSection" class="active-tracking-section" style="display: none;">
+            <div class="broadcasting-radar">
+                <div class="radar-dot"></div>
+                <div class="radar-circle circle-1"></div>
+                <div class="radar-circle circle-2"></div>
+            </div>
+            <h2>Broadcasting Live</h2>
+            <p>Students can now see your bus on the map.</p>
+
+            <div class="stats-card">
+                <div class="stat">
+                    <span>Updates Sent</span>
+                    <strong id="updatesCount">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Current Speed</span>
+                    <strong id="currentSpeed">0 km/h</strong>
+                </div>
+            </div>
+
+            <button id="stopTrackingBtn" class="btn btn-danger btn-large">Stop Sharing</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/driver.js"></script>
+</body>
+
+</html>

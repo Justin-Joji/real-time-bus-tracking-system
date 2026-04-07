@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Driver Login - Musaliar Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dark-theme">
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h2>Driver Portal</h2>
+            <div class="input-group">
+                <label>Driver ID</label>
+                <input type="text" id="loginDriverId" placeholder="e.g. D101">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginDriverPass" placeholder="Enter password">
+            </div>
+            <button class="btn" id="driverLoginBtn">Login</button>
+            <p style="margin-top: 15px;"><a href="index.html" style="color: var(--primary);">Return Home</a></p>
+            <p style="margin-top: 10px;">New Driver? <a href="driver-register.html"
+                    style="color: var(--primary);">Register here</a></p>
+        </div>
+    </div>
+    <script type="module" src="js/driver-auth.js"></script>
+</body>
+
+</html>

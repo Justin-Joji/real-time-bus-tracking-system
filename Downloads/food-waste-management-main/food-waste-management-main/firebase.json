@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "tybot-c3ce5-d245c",
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

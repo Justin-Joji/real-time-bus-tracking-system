@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Login - Musaliar Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dark-theme">
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h2>Student Portal</h2>
+            <div id="loginSection">
+                <div class="input-group">
+                    <label>Register Number</label>
+                    <input type="text" id="loginStudentId" placeholder="e.g. 21CS001">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="loginStudentPass" placeholder="Enter password">
+                </div>
+                <button class="btn" id="studentLoginBtn">Login to Track</button>
+                <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);">
+                    New Student? <a href="#" id="showRegisterBtn" style="color: var(--primary);">Register here</a>
+                </p>
+                <p style="margin-top: 5px;"><a href="index.html"
+                        style="color: var(--text-muted); font-size: 14px;">Return Home</a></p>
+            </div>
+
+            <div id="registerSection" style="display: none;">
+                <div class="input-group">
+                    <label>Register Number</label>
+                    <input type="text" id="regStudentId" placeholder="e.g. 21CS001">
+                </div>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regStudentName" placeholder="e.g. John Doe">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="regStudentPass" placeholder="Create password">
+                </div>
+                <button class="btn" id="studentRegisterBtn">Register Account</button>
+                <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);">
+                    Already have an account? <a href="#" id="showLoginBtn" style="color: var(--primary);">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/student-auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Driver Dashboard - Musaliar Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        if (!localStorage.getItem('driverAuth_id')) window.location.href = 'driver-login.html';
+    </script>
+</head>
+
+<body class="dark-theme">
+    <div class="driver-dashboard">
+        <div class="panel-section">
+            <h2 style="color: var(--primary); margin-bottom: 2rem;">Driver Control Panel</h2>
+            <div class="tracking-info-box mb-3" style="margin-bottom: 1rem;">
+                <label>Welcome, Driver</label>
+                <div class="val" id="dispDriverName">--</div>
+            </div>
+            <div class="tracking-info-box" style="margin-bottom: 1rem;">
+                <label>Assigned Bus</label>
+                <div class="val" id="dispBusNumber">--</div>
+            </div>
+            <div class="tracking-info-box" style="margin-bottom: 2rem;">
+                <label>Current Route</label>
+                <div class="val" id="dispRoute">--</div>
+                <div id="dispStops" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;"></div>
+            </div>
+
+            <div id="statusIndicator" class="status-badge status-offline"
+                style="text-align: center; margin-bottom: 1.5rem; display: inline-block;">
+                OFFLINE - Location Not Sharing
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button class="btn" id="startTripBtn" style="background: var(--success);">Start Trip
+                    (Broadcast)</button>
+                <button class="btn" id="endTripBtn" style="background: var(--danger); display:none;">End Trip</button>
+            </div>
+            <button class="btn"
+                style="background: transparent; border: 1px solid var(--border); color: var(--text-main); margin-top: 1.5rem;"
+                onclick="logout()">Logout / Change Account</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/driver-dashboard.js"></script>
+    <script>
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

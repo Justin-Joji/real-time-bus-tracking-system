@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Tracking - Musaliar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+        if (!localStorage.getItem('studentAuth_id')) window.location.href = 'student-login.html';
+    </script>
+</head>
+
+<body class="dark-theme">
+    <div class="student-tracking-layout">
+        <header class="tracking-header">
+            <div>
+                <h2 style="color: var(--primary);">Live Bus Tracking</h2>
+                <div style="font-size: 0.85rem; color: var(--text-muted);" id="studentGreeting">Welcome, Student</div>
+            </div>
+            <a href="#" onclick="logoutStudent()"
+                style="color: var(--danger); text-decoration: none; font-size: 0.9rem; font-weight: 500;">
+                <span class="material-icons" style="vertical-align: middle; font-size: 1.1rem;">logout</span> Logout
+            </a>
+        </header>
+
+        <div class="tracking-main">
+            <!-- Sidebar Info -->
+            <aside class="tracking-sidebar">
+                <h3>Select Your Bus</h3>
+                <div class="input-group">
+                    <select id="activeBusSelect">
+                        <option value="">Fetching active buses...</option>
+                    </select>
+                </div>
+
+                <div id="trackingDetails" style="display: none; flex-direction: column; gap: 1rem;">
+                    <div class="tracking-info-box">
+                        <label>Driver</label>
+                        <div class="val" id="dispStdDriver">--</div>
+                    </div>
+                    <div class="tracking-info-box">
+                        <label>Route</label>
+                        <div class="val" id="dispStdRoute">--</div>
+                    </div>
+                    <div class="tracking-info-box" style="border-left: 4px solid var(--success);">
+                        <label>Distance to you (Straight-line)</label>
+                        <div class="val" id="dispStdDistance">Calculating...</div>
+                    </div>
+                    <div class="tracking-info-box" style="border-left: 4px solid var(--primary);">
+                        <label>Estimated Arrival</label>
+                        <div class="val" id="dispStdEta">-- min</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Map View -->
+            <div id="map" style="flex: 1; border-radius: 0; margin: 0; height: 100%;"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/student.js"></script>
+    <script>
+        document.getElementById('studentGreeting').innerText = `Welcome, ${localStorage.getItem('studentAuth_name') || 'Student'}`;
+        function logoutStudent() {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+
+</html>

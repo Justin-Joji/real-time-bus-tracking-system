@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Musaliar Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        if (localStorage.getItem('adminAuth') !== 'true') window.location.href = 'admin-login.html';
+    </script>
+</head>
+
+<body class="dark-theme">
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 style="color: var(--primary); font-size: 1.2rem;">MCET Admin</h2>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active" data-tab="dashboard">
+                    <span class="material-icons">dashboard</span> Dashboard
+                </a>
+                <a href="#" class="nav-link" data-tab="drivers">
+                    <span class="material-icons">badge</span> Manage Drivers
+                </a>
+                <a href="#" class="nav-link" data-tab="routes">
+                    <span class="material-icons">alt_route</span> Manage Routes
+                </a>
+                <a href="#" class="nav-link"
+                    onclick="localStorage.removeItem('adminAuth'); window.location.href='index.html';">
+                    <span class="material-icons">logout</span> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="topbar">
+                <h2>Fleet Overview</h2>
+                <div class="user-profile">Super Admin</div>
+            </div>
+
+            <div id="tab-dashboard" class="tab-content">
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="material-icons">directions_bus</span></div>
+                        <div class="stat-info">
+                            <h4>Total Registered Buses</h4>
+                            <h2 id="totalBuses">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="material-icons">person</span></div>
+                        <div class="stat-info">
+                            <h4>Active Drivers</h4>
+                            <h2 id="totalDrivers">0</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--success);"><span
+                                class="material-icons">sensors</span></div>
+                        <div class="stat-info">
+                            <h4>Live Running Trips</h4>
+                            <h2 id="liveTrips">0</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3>Live Global Map</h3>
+                    <div id="map" style="height: 400px; margin-top: 15px;"></div>
+                </div>
+            </div>
+
+            <!-- Manage Drivers Tab -->
+            <div id="tab-drivers" class="tab-content" style="display:none;">
+                <div class="panel-section" style="margin-bottom: 20px;">
+                    <div class="panel-header">
+                        <h3>Pending Driver Approvals</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Driver ID</th>
+                                <th>Name</th>
+                                <th>Bus Number</th>
+                                <th>Assigned Route</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pendingDriverTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="panel-section">
+                    <div class="panel-header">
+                        <h3>Active Registered Drivers</h3>
+                        <button class="btn" style="width: auto;" onclick="showDriverModal()">+ Add Driver</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Driver ID</th>
+                                <th>Name</th>
+                                <th>Bus Number</th>
+                                <th>Assigned Route</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="driverTableBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Add Driver Form -->
+                <div class="panel-section" id="addDriverSection" style="display:none; max-width: 500px;">
+                    <h3>Add / Edit Driver</h3>
+                    <div class="input-group mt-3">
+                        <label>Driver ID (Username)</label>
+                        <input type="text" id="addDriverId" placeholder="e.g. D101">
+                    </div>
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input type="text" id="addDriverName">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="text" id="addDriverPass">
+                    </div>
+                    <div class="input-group">
+                        <label>Bus Number</label>
+                        <input type="text" id="addBusNumber" placeholder="e.g. Bus 5">
+                    </div>
+                    <div class="input-group">
+                        <label>Assign Route</label>
+                        <select id="assignRouteSelect">
+                            <option value="">Select Route</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="saveDriverBtn">Save Driver</button>
+                    <button class="btn" style="background: #334155; margin-top: 10px;"
+                        onclick="document.getElementById('addDriverSection').style.display='none'">Cancel</button>
+                </div>
+            </div>
+
+            <!-- Manage Routes Tab -->
+            <div id="tab-routes" class="tab-content" style="display:none;">
+                <div class="panel-section">
+                    <div class="panel-header">
+                        <h3>Existing Routes</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Route ID</th>
+                                <th>Route Name</th>
+                                <th>Start Location</th>
+                                <th>Stops</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="routeTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="panel-section" style="max-width: 600px;">
+                    <h3>Create New Route</h3>
+                    <div class="input-group mt-3">
+                        <label>Route ID (slug)</label>
+                        <input type="text" id="routeId" placeholder="e.g. route1">
+                    </div>
+                    <div class="input-group">
+                        <label>Route Name</label>
+                        <input type="text" id="routeName" placeholder="e.g. Kollam Route">
+                    </div>
+                    <div class="input-group">
+                        <label>Start Location</label>
+                        <input type="text" id="routeStart" value="Musaliar College" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label>Stops (comma separated)</label>
+                        <input type="text" id="routeStops" placeholder="e.g. Adoor, Kottarakkara, Kollam">
+                    </div>
+                    <button class="btn" id="saveRouteBtn">Save Route</button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+
+</html>

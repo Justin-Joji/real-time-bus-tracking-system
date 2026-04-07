@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Driver Registration - Musaliar Tracking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dark-theme">
+    <div class="login-wrapper">
+        <div class="login-card">
+            <h2>Driver Registration</h2>
+            <div class="input-group">
+                <label>Driver ID</label>
+                <input type="text" id="regDriverId" placeholder="e.g. D102">
+            </div>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="regDriverName" placeholder="e.g. John Doe">
+            </div>
+            <div class="input-group">
+                <label>Bus Number</label>
+                <input type="text" id="regBusNumber" placeholder="e.g. Bus 10">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="regDriverPass" placeholder="Enter password">
+            </div>
+            <button class="btn" id="driverRegBtn">Register</button>
+            <p style="margin-top: 15px;">Already registered? <a href="driver-login.html"
+                    style="color: var(--primary);">Login here</a></p>
+        </div>
+    </div>
+    <script type="module" src="js/driver-register.js"></script>
+</body>
+
+</html>

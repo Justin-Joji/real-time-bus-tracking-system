@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MCET Bus Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar glass-panel">
+            <div class="logo">
+                <h2>MCET Admin</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-tab="dashboard">Live Dashboard</a>
+                <a href="#" class="nav-item" data-tab="buses">Detailed Fleet List</a>
+                <a href="index.html" class="nav-item">Student Map View</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header glass-panel">
+                <h1>Fleet Management Overview</h1>
+                <div class="admin-user">Administrator</div>
+            </header>
+
+            <div class="content-area">
+                <!-- Dashboard Tab -->
+                <div id="dashboardTab" class="tab-content active">
+                    <div class="stats-row">
+                        <div class="stat-card glass-panel">
+                            <h3>Total Active Buses</h3>
+                            <div class="value" id="activeBusesCount">0</div>
+                        </div>
+                        <div class="stat-card glass-panel">
+                            <h3>Total Registered Routes</h3>
+                            <div class="value">12</div>
+                        </div>
+                    </div>
+
+                    <div class="map-wrapper glass-panel mt-4">
+                        <h3>Global Live Fleet Map</h3>
+                        <div id="adminMap"></div>
+                    </div>
+                </div>
+
+                <!-- Buses Tab -->
+                <div id="busesTab" class="tab-content" style="display:none;">
+                    <div class="glass-panel">
+                        <div class="table-header">
+                            <h3>Currently Broadcasting Drivers</h3>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Route / Bus Details</th>
+                                    <th>Driver Name</th>
+                                    <th>Last Signal Ping</th>
+                                    <th>Speed</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activeBusesTableBody">
+                                <!-- Dynamic rows rendered via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/admin.js"></script>
+</body>
+
+</html>
